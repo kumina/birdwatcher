@@ -96,14 +96,13 @@ class BirdHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
 
     # Command that needs to be invoked to extract protocol statistics
     # through birdcl(1).
-#    _BIRDCL_COMMAND = [
-#        'sudo', 'docker', 'exec', '-i', 'calico-node',
-#        'birdcl', '-s', '/var/run/calico/bird.ctl',
-#        'show', 'protocols', 'all',
-#    ]
     _BIRDCL_COMMAND = [
-        'cat', '/Users/ed/Desktop/birdcl-output',
+        'birdcl', '-s', '/var/run/calico/bird.ctl',
+        'show', 'protocols', 'all',
     ]
+#    _BIRDCL_COMMAND = [
+#        'cat', '/Users/ed/Desktop/birdcl-output',
+#    ]
 
     def do_GET(self):
         try:
@@ -129,5 +128,7 @@ class BirdHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
                 self.wfile.write('%s %d\n' % (key, value))
 
 if __name__ == '__main__':
-    server = BaseHTTPServer.HTTPServer(('', 6502), BirdHTTPServer)
+    address = ('', 6502)
+    server = BaseHTTPServer.HTTPServer(address, BirdHTTPServer)
+    print 'Bound on %s. Waiting for requests.' % (repr(address))
     server.serve_forever()
