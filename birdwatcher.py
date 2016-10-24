@@ -128,7 +128,7 @@ class BirdHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
                 self.wfile.write('%s %d\n' % (key, value))
 
 if __name__ == '__main__':
-    address = ('', 6502)
+    address = ('', 80)
     server = BaseHTTPServer.HTTPServer(address, BirdHTTPServer)
     print 'Bound on %s. Waiting for requests.' % (repr(address))
     server.serve_forever()
