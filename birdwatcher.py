@@ -111,6 +111,7 @@ class BirdHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
             self.send_response(500)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
+            traceback.print_exc()
             self.wfile.write(traceback.format_exc())
         else:
             # Success. Print all metrics.
