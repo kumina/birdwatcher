@@ -1,20 +1,16 @@
 #!/usr/bin/env python
 
-# Birdwatcher: Prometheus stats exporter for BIRD.
-#
 # Copyright (c) 2016 Kumina, https://kumina.nl/
-# Author: Ed Schouten <ed@kumina.nl>
 #
-# This tiny web server runs 'birdcl show protocols all' and converts its
-# output into a series of metrics. These metrics can be obtained by
-# performing an arbitrary GET request on port 6052. They are formatted
-# in such a way that they can be parsed by Prometheus.
+# This file is distributed under a 2-clause BSD license.
+# See the LICENSE file for details.
 
 import BaseHTTPServer
 import itertools
 import subprocess
 import sys
 import traceback
+
 
 def get_split_lines(f):
     """Returns lines in a file as a list of split words."""
