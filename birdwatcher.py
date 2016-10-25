@@ -100,9 +100,6 @@ class BirdHTTPServer(BaseHTTPServer.BaseHTTPRequestHandler):
         'birdcl', '-s', '/var/run/calico/bird.ctl',
         'show', 'protocols', 'all',
     ]
-#    _BIRDCL_COMMAND = [
-#        'cat', '/Users/ed/Desktop/birdcl-output',
-#    ]
 
     def do_GET(self):
         try:
