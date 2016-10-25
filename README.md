@@ -14,3 +14,6 @@ so that every node in your cluster runs exactly one copy of this daemon.
 Just make sure that `/var/run/calico/bird.ctl` points to the UNIX socket
 exposed by BIRD by using a `hostPath` directive. The provided
 `Dockerfile` already contains a copy of the `birdcl` utility.
+
+Be sure to check out `birdwatcher_test.py` to get an idea of how the
+output of `birdcl` is translated to a set of metrics.
