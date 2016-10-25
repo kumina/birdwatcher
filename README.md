@@ -2,7 +2,7 @@
 
 When using [Calico](https://www.projectcalico.org/) in combination with
 [Kubernetes](http://kubernetes.io/]), it may make sense to have some
-basic monitoring through it through [Prometheus](https://prometheus.io/).
+basic monitoring for it through [Prometheus](https://prometheus.io/).
 
 This utility implements a simple web server written in Python that
 extracts metrics from the BIRD internet routing daemon that is used by
