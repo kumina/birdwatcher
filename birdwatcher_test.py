@@ -12,11 +12,13 @@ import unittest
 
 class TestParseShowProtocols(unittest.TestCase):
 
+    maxDiff = 4000
+
     def test_static(self):
         """Tests the metrics output for a static route."""
         text = '''BIRD 1.5.0 ready.
 name     proto    table    state  since       info
-static1  Static   master   up     2016-10-21  
+static1  Static   master   up     2016-10-21
   Preference:     200
   Input filter:   ACCEPT
   Output filter:  REJECT
@@ -30,6 +32,9 @@ static1  Static   master   up     2016-10-21
         self.assertEqual(
             list(birdwatcher.parse_show_protocols(StringIO.StringIO(text))),
             [('bird_up{bird_protocol_instance="static1"}', 1),
+             ('bird_info{bird_protocol_instance="static1",value=unknown}', 1),
+             ('bird_info{bird_protocol_instance="static1",value=Active}', 0),
+             ('bird_info{bird_protocol_instance="static1",value=Established}', 0),
              ('bird_preference{bird_protocol_instance="static1"}', 200),
              ('bird_routes{bird_protocol_instance="static1",bird_route_type="imported"}', 1),
              ('bird_routes{bird_protocol_instance="static1",bird_route_type="exported"}', 0),
@@ -73,6 +78,9 @@ Mesh_10_101_4_114 BGP      master   start  2016-10-23  Active        Socket: Hos
         self.assertEqual(
             list(birdwatcher.parse_show_protocols(StringIO.StringIO(text))),
             [('bird_up{bird_protocol_instance="Mesh_10_101_4_114"}', 0),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_114",value=unknown}', 0),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_114",value=Active}', 1),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_114",value=Established}', 0),
              ('bird_preference{bird_protocol_instance="Mesh_10_101_4_114"}', 100),
              ('bird_routes{bird_protocol_instance="Mesh_10_101_4_114",bird_route_type="imported"}', 0),
              ('bird_routes{bird_protocol_instance="Mesh_10_101_4_114",bird_route_type="exported"}', 0),
@@ -96,7 +104,7 @@ Mesh_10_101_4_114 BGP      master   start  2016-10-23  Active        Socket: Hos
     def test_mesh_up(self):
         """Tests the metrics output for a mesh route that is up."""
         text = '''BIRD 1.5.0 ready.
-Mesh_10_101_4_182 BGP      master   up     2016-10-23  Established   
+Mesh_10_101_4_182 BGP      master   up     2016-10-23  Established
   Description:    Connection to BGP peer
   Preference:     100
   Input filter:   ACCEPT
@@ -120,6 +128,9 @@ Mesh_10_101_4_182 BGP      master   up     2016-10-23  Established
         self.assertEqual(
             list(birdwatcher.parse_show_protocols(StringIO.StringIO(text))),
             [('bird_up{bird_protocol_instance="Mesh_10_101_4_182"}', 1),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_182",value=unknown}', 0),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_182",value=Active}', 0),
+             ('bird_info{bird_protocol_instance="Mesh_10_101_4_182",value=Established}', 1),
              ('bird_preference{bird_protocol_instance="Mesh_10_101_4_182"}', 100),
              ('bird_routes{bird_protocol_instance="Mesh_10_101_4_182",bird_route_type="imported"}', 1),
              ('bird_routes{bird_protocol_instance="Mesh_10_101_4_182",bird_route_type="exported"}', 1),
