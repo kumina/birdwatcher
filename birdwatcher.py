@@ -38,7 +38,7 @@ def pairwise(iterable):
 
 
 def bird_info_line(protocol_instance, actual_info, printed_info):
-    return ('bird_info{bird_protocol_instance="%s",value=%s}' %
+    return ('bird_info{bird_protocol_instance="%s",value="%s"}' %
             (protocol_instance,printed_info),
            int(actual_info == printed_info))
 
