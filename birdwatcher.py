@@ -37,6 +37,11 @@ def pairwise(iterable):
     return itertools.izip(a, a)
 
 
+def bird_info_line(protocol_instance, actual_info, printed_info):
+    return ('bird_info{bird_protocol_instance="%s",value="%s"}' %
+            (protocol_instance,printed_info),
+           int(actual_info == printed_info))
+
 def parse_show_protocols(f):
     """Parses the output of 'birdcl show protocols all'."""
     lines = skip_garbage(f)
@@ -46,6 +51,11 @@ def parse_show_protocols(f):
         protocol_instance = line[0]
         yield ('bird_up{bird_protocol_instance="%s"}' % protocol_instance,
                int(line[3] == 'up'))
+
+        info = line[5] if len(line)>5 else "unknown"
+        yield bird_info_line(protocol_instance, info, "unknown")
+        yield bird_info_line(protocol_instance, info, "Active")
+        yield bird_info_line(protocol_instance, info, "Established")
 
         for line in lines:
             # Empty line denotes the end of the entry.
