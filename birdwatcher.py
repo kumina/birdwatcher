@@ -70,6 +70,10 @@ def parse_show_protocols(f):
                         yield ('bird_route_changes{bird_protocol_instance="%s",bird_direction="%s",bird_action="%s",bird_outcome="%s"}' %
                                (protocol_instance, line[0].lower(), line[1].rstrip(':'), outcome),
                                int(count))
+            elif line[0] == 'BGP' and line[1] == 'state:':
+                yield ('bird_bgp_state{bird_protocol_instance="%s",bird_bgp_state="%s"}' %
+                       (protocol_instance, line[2]),
+                       1)
             elif line[:2] == ['Hold', 'timer:']:
                 v = line[2].split('/')
                 yield ('bird_hold_timer_current{bird_protocol_instance="%s"}' %

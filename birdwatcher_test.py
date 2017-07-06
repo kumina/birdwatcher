@@ -91,7 +91,8 @@ Mesh_10_101_4_114 BGP      master   start  2016-10-23  Active        Socket: Hos
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_114",bird_direction="export",bird_action="updates",bird_outcome="filtered"}', 0),
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_114",bird_direction="export",bird_action="updates",bird_outcome="accepted"}', 0),
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_114",bird_direction="export",bird_action="withdraws",bird_outcome="received"}', 0),
-             ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_114",bird_direction="export",bird_action="withdraws",bird_outcome="accepted"}', 0)])
+             ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_114",bird_direction="export",bird_action="withdraws",bird_outcome="accepted"}', 0),
+             ('bird_bgp_state{bird_protocol_instance="Mesh_10_101_4_114",bird_bgp_state="Active"}', 1)])
 
     def test_mesh_up(self):
         """Tests the metrics output for a mesh route that is up."""
@@ -139,6 +140,7 @@ Mesh_10_101_4_182 BGP      master   up     2016-10-23  Established
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_182",bird_direction="export",bird_action="updates",bird_outcome="accepted"}', 1),
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_182",bird_direction="export",bird_action="withdraws",bird_outcome="received"}', 0),
              ('bird_route_changes{bird_protocol_instance="Mesh_10_101_4_182",bird_direction="export",bird_action="withdraws",bird_outcome="accepted"}', 0),
+             ('bird_bgp_state{bird_protocol_instance="Mesh_10_101_4_182",bird_bgp_state="Established"}', 1),
              ('bird_hold_timer_current{bird_protocol_instance="Mesh_10_101_4_182"}', 177),
              ('bird_hold_timer_initial{bird_protocol_instance="Mesh_10_101_4_182"}', 240),
              ('bird_keepalive_timer_current{bird_protocol_instance="Mesh_10_101_4_182"}', 61),
