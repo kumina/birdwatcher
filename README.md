@@ -1,3 +1,5 @@
+**Important** Kumina is no longer actively maintaining this code. Feel free to fork and publish yourself!
+
 # Birdwatcher: Prometheus exporter for Calico/BIRD
 
 When using [Calico](https://www.projectcalico.org/) in combination with
